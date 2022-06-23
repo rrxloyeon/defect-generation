@@ -34,16 +34,16 @@ def perform_augmentation():
             log['background_type'].append(bg_type)
 
             # save figure
-            plt.imshow(image)
             if not os.path.isdir(os.path.split(save_fig_name)[0]):
                 os.makedirs(os.path.split(save_fig_name)[0])
-            plt.savefig(save_fig_name)
+            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+            cv2.imwrite(save_fig_name, image)
             if PRINT_LOG :
                 # print("Success saving image..", c, "{}/{}".format(i, num_files))
                 pbar.set_description("Saving Image.. " + c)
 
             # save figure : Pass(src)
-            pass_dir = os.path.join(save_dir_args, 'Pass', bg_type, os.path.basename(src_dir))
+            pass_dir = os.path.join(save_dir_args, 'Pass', bg_type, c+str(i)+'.jpg')
             if not os.path.isdir(os.path.split(pass_dir)[0]):
                 os.makedirs(os.path.split(pass_dir)[0])
             try:

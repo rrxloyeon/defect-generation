@@ -10,6 +10,7 @@ from albumentations.core.transforms_interface import ImageOnlyTransform
 data_dir_args = "/home/esoc/datasets/Bulryang_12inch"
 defect_dir_args = "/home/esoc/koosy/git_rrxloyeon/gen_defect/defect"
 default_class_args = 'foreign'
+border_rate_args = 0.9
 
 class DefectAugmentation(ImageOnlyTransform):
     """
@@ -73,7 +74,7 @@ class DefectAugmentation(ImageOnlyTransform):
 
             # Creating a mask and inverse mask 
             img2gray = cv2.cvtColor(defect, cv2.COLOR_BGR2GRAY)
-            _, mask = cv2.threshold(img2gray, np.mean(defect)*0.9, 255, cv2.THRESH_BINARY_INV)
+            _, mask = cv2.threshold(img2gray, np.mean(defect)*border_rate_args, 255, cv2.THRESH_BINARY_INV)
             mask_inv = cv2.bitwise_not(mask)
 
             # Now black-out the area of defect in ROI
