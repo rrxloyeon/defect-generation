@@ -9,15 +9,11 @@ from tqdm import tqdm
 PRINT_LOG = True
 
 src_dir_args = "/home/esoc/datasets/Bulryang_12inch/Pass"
-save_dir_args = "/home/esoc/koosy/git_rrxloyeon/gen_defect_dataset/madebyme"
 save_log_args = True
-
-def make_name(classname, num, dir=save_dir_args):
-    # make save_fig_name
-    return "{}/{}/{}.jpg".format(dir, classname, num)
+dark_args = False
 
 def perform_augmentation():
-    aug = DefectAugmentation()
+    aug = DefectAugmentation(dark_defect=dark_args)
     log = {'src_dir' : [], 'defects_dir' : [], 'output_dir':[], 'background_type' : [], 'src_save_dir' : []}
     classes = ['Foreign_Material', 'Parasitic']
     for c in classes :
@@ -26,7 +22,7 @@ def perform_augmentation():
         num_files = 10
         pbar = tqdm(range(num_files))
         for i in pbar:
-            save_fig_name = make_name(c, i)
+            save_fig_name = aug.make_name(c, i)
             image, src_dir, defects_dir, bg_type = aug.apply(src_dir_args, c)
             log['src_dir'].append(src_dir)
             log['defects_dir'].append(defects_dir)
@@ -43,7 +39,7 @@ def perform_augmentation():
                 pbar.set_description("Saving Image.. " + c)
 
             # save figure : Pass(src)
-            pass_dir = os.path.join(save_dir_args, 'Pass', bg_type, c+str(i)+'.jpg')
+            pass_dir = os.path.join(aug.save_dir, 'Pass', bg_type, c+str(i)+'.jpg')
             if not os.path.isdir(os.path.split(pass_dir)[0]):
                 os.makedirs(os.path.split(pass_dir)[0])
             try:

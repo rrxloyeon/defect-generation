@@ -11,6 +11,7 @@ data_dir_args = "/home/esoc/datasets/Bulryang_12inch"
 defect_dir_args = "/home/esoc/koosy/git_rrxloyeon/gen_defect/defect"
 default_class_args = 'foreign'
 border_rate_args = 0.9
+save_dir_args = "/home/esoc/koosy/git_rrxloyeon/gen_defect_dataset/madebyme"
 
 class DefectAugmentation(ImageOnlyTransform):
     """
@@ -26,6 +27,14 @@ class DefectAugmentation(ImageOnlyTransform):
         self.defects = defects
         self.dark_defect = dark_defect
         self.defects_folder = defect_dir_args
+        self.save_dir = save_dir_args
+    
+    def make_name(self, classname, num, dir=save_dir_args):
+        # make save_fig_name
+        if self.dark_defect :
+            return "{}/{}/{}.jpg".format(dir+'dark', classname, num)
+        else :
+            return "{}/{}/{}.jpg".format(dir, classname, num)
 
     def apply(self, background_dir, class_name):
         """
