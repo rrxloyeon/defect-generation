@@ -11,7 +11,7 @@ PRINT_LOG = True
 
 src_dir_args = "/home/esoc/datasets/Bulryang_12inch/Pass"
 save_log_args = True
-dark_args = False
+dark_args = True
 log_filedir_args = "./log/"
 log_filename_args = "log_"+datetime.today().strftime("%Y-%m-%d_%H:%M:%S")
 if dark_args :
