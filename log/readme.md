@@ -13,6 +13,7 @@ with open("write log file name", "rb") as f:
 
 ## structure of log file
 - log is dictionary type binary file
+
 |key|type|vale|
 |------------|----|-----------------------------------------------------------|
 |src_dir|list|directory of original background image data|
@@ -20,3 +21,10 @@ with open("write log file name", "rb") as f:
 |output_dir|list|directory of augmented image|
 |background_type|list|type of background image; 'orange' or 'green'|
 |src_save_dir|list|directory of background image that copy from src_dir|
+
+## compared image
+- left : original image of defect
+- right : output image of DefectAumentation
+- Example :
+
+![468](./compared/log_2022-06-23_19:47:47/Parasitic/468.jpg)
